@@ -11,3 +11,16 @@ export const decreaseCounter = () => {
     payload: 1
   }
 }
+
+export const fetchUsers = () => {
+  return {
+    type: 'FETCH_USERS'
+  }
+}
+
+export const fetchUsersSuccessful = users => {
+  return {
+    type: 'FETCH_USERS_SUCCESSFUL',
+    users
+  }
+}

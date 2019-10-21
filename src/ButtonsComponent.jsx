@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { increaseCounter, decreaseCounter } from './actions/counterActions'
+import { increaseCounter, decreaseCounter, fetchUsers } from './actions/counterActions'
 
 export class ButtonsComponent extends Component {
 
@@ -9,8 +9,16 @@ export class ButtonsComponent extends Component {
       <div>
         <button onClick={this.props.increaseCounter}>INCREASE</button>
         <button onClick={this.props.decreaseCounter}>DECREASE</button>
+        <button onClick={this.props.fetchUsers}>FETCH USERS</button>
         <span>Counter: {this.props.counter}</span>
         <div>{this.props.message}</div>
+        <div>
+          {
+            this.props.users.map( user => {
+              return <div key={user.id}>{user.name}</div>
+            } )
+          }
+        </div>
       </div>
     )
   }
@@ -19,8 +27,9 @@ export class ButtonsComponent extends Component {
 const mapStateToProps = state => {
   return {
     counter: state.counterReducer.counter,
-    message: state.counterReducer.message
+    message: state.counterReducer.message,
+    users: state.counterReducer.users
   }
 }
 
-export default connect(mapStateToProps, { increaseCounter, decreaseCounter })(ButtonsComponent)
+export default connect(mapStateToProps, { increaseCounter, decreaseCounter, fetchUsers })(ButtonsComponent)

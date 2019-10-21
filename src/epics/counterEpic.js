@@ -1,6 +1,8 @@
-import { pipe } from 'rxjs'
+import axios from 'axios'
+import { pipe, from } from 'rxjs'
 import { ofType } from 'redux-observable'
-import { mapTo, delay } from 'rxjs/operators'
+import { mapTo, delay, mergeMap, map } from 'rxjs/operators'
+import { fetchUsersSuccessful } from '../actions/counterActions'
 
 const counterIncreaseEpic = pipe( // or  = action$ = action$.pipe(
   ofType('INCREASE'),
@@ -14,7 +16,16 @@ const counterDecreaseEpic = pipe( // or  = action$ = action$.pipe(
   mapTo({ type: 'COUNTER_DECREASED' })
 )
 
+const fetchUsersEpic = action$ =>
+  action$.pipe(ofType('FETCH_USERS'),
+  mergeMap( () =>
+    from(axios.get('https://jsonplaceholder.typicode.com/users'))
+      .pipe(map(response => fetchUsersSuccessful(response.data)))
+  )
+)
+
 export {
   counterIncreaseEpic,
-  counterDecreaseEpic
+  counterDecreaseEpic,
+  fetchUsersEpic
 }

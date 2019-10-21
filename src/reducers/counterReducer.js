@@ -1,6 +1,7 @@
 const initialState = {
   counter: 0,
-  message: ''
+  message: '',
+  users: []
 }
 
 const counterReducer = (state = initialState, action) => {
@@ -20,11 +21,16 @@ const counterReducer = (state = initialState, action) => {
         ...state,
         message: state.message + 'Counter increased!'
       }
-      case 'COUNTER_DECREASED':
-          return {
-            ...state,
-            message: state.message + 'Counter decreased!'
-          }
+    case 'COUNTER_DECREASED':
+        return {
+          ...state,
+          message: state.message + 'Counter decreased!'
+        }
+    case 'FETCH_USERS_SUCCESSFUL':
+      return {
+        ...state,
+        users: [...action.users]
+      }
     default:
       return state
   }
