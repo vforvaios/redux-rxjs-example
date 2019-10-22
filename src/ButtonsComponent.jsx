@@ -19,6 +19,14 @@ export class ButtonsComponent extends Component {
             } )
           }
         </div>
+
+        <div style={{marginTop: '50px'}}>
+          {
+            this.props.todos.map( (todo, index) => {
+              return <div key={index}>{todo.title}</div>
+            } )
+          }
+        </div>
       </div>
     )
   }
@@ -28,7 +36,8 @@ const mapStateToProps = state => {
   return {
     counter: state.counterReducer.counter,
     message: state.counterReducer.message,
-    users: state.counterReducer.users
+    users: state.counterReducer.users,
+    todos: state.counterReducer.todos
   }
 }
 

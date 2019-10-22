@@ -24,3 +24,16 @@ export const fetchUsersSuccessful = users => {
     users
   }
 }
+
+export const fetchTodos = () => {
+  return {
+    type: 'FETCH_TODOS'
+  }
+}
+
+export const fetchTodosSuccessful = todos => {
+  return {
+    type: 'FETCH_TODOS_SUCCESSFULLY',
+    todos
+  }
+}

@@ -1,7 +1,8 @@
 const initialState = {
   counter: 0,
   message: '',
-  users: []
+  users: [],
+  todos: []
 }
 
 const counterReducer = (state = initialState, action) => {
@@ -30,6 +31,11 @@ const counterReducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...action.users]
+      }
+    case 'FETCH_TODOS_SUCCESSFULLY':
+      return {
+        ...state,
+        todos: [...action.todos]
       }
     default:
       return state

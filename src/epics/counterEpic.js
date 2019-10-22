@@ -16,8 +16,8 @@ const counterDecreaseEpic = pipe( // or  = action$ = action$.pipe(
   mapTo({ type: 'COUNTER_DECREASED' })
 )
 
-const fetchUsersEpic = action$ =>
-  action$.pipe(ofType('FETCH_USERS'),
+const fetchUsersEpic = pipe(
+  ofType('FETCH_USERS'),
   mergeMap( () =>
     from(axios.get('https://jsonplaceholder.typicode.com/users'))
       .pipe(map(response => fetchUsersSuccessful(response.data)))
